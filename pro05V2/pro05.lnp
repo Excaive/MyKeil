@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"pro05.obj" 
+TO "pro05" 
+RAMSIZE(256) 
