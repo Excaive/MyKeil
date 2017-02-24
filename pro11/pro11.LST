@@ -1,0 +1,149 @@
+C51 COMPILER V9.00   PRO11                                                                 02/24/2017 23:34:08 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE PRO11
+OBJECT MODULE PLACED IN pro11.OBJ
+COMPILER INVOKED BY: D:\_RUANJIAN\keil\C51\BIN\C51.EXE pro11.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //用无源蜂鸣器演奏《献给爱丽丝》
+   2            
+   3          #include <reg52.h>    
+   4          #include <intrins.h>    
+   5          sbit Beep =  P0^4 ;    
+   6          unsigned char n=0,s,b;             //n 节拍，s 升音，b 八度
+   7          
+   8          int code pitch1[]  = { 111, 256, 228, 207, 192, 172, 153, 135};
+   9          int code pitch1s[] = { 111, 241, 214, 111, 183, 160, 143}; 
+  10          int code pitch2[]  = { 111, 127, 113, 101,  95,  85,  76,  67};
+  11          int code pitch2s[] = { 111, 120, 107, 111,  90,  80,  71};
+  12          int code pitch3[]  = { 111,  64,  57,  50,  48,  42,  38};
+  13          int code pitch3s[] = { 111,  60,  53, 111,  45,  40};
+  14              
+  15          unsigned char code music_tab[] =
+  16          {                              //音高，升音，八度，节拍   
+  17                  3,      0,      3,      4,
+  18                  2,      1,      3,      4,
+  19                  3,      0,      3,      4,
+  20                  2,      1,      3,      4,
+  21                  3,      0,      3,      4,
+  22                  7,      0,      2,      4,
+  23                  2,      0,      3,      4,
+  24                  1,      0,      3,      4,      //
+  25                  6,      0,      2,      4,
+  26                  3,      0,      1,      4,
+  27                  6,      0,      1,      4,
+  28                  1,      0,      2,      4,
+  29                  3,      0,      2,      4,
+  30                  6,      0,      2,      4,      //
+  31                  7,      0,      2,      4,
+  32                  5,      1,      1,      4,
+  33                  7,      0,      1,      4,
+  34                  3,      0,      2,      4,
+  35                  1,      0,      3,      4,
+  36                  7,      0,      2,      4,      //
+  37                  6,      0,      2,      4,
+  38                  1,      0,      2,      4,
+  39                  3,      0,      2,      4,
+  40                  7,      0,      2,      4,
+  41                  1,      0,      3,      4,
+  42                  2,      0,      3,      4,      //
+  43                  3,      0,      3,      12,
+  44                  5,      0,      2,      4,
+  45                  4,      0,      3,      4,
+  46                  3,      0,      3,      4,      //
+  47                  2,      0,      3,      12,
+  48                  3,      0,      2,      4,
+  49                  3,      0,      3,      4,
+  50                  2,      0,      3,      4,      //
+  51                  1,      0,      3,      12,
+  52                  3,      0,      2,      4,
+  53                  2,      0,      3,      4,
+  54                  1,      0,      3,      4,      //
+  55                  7,      0,      2,      12,
+C51 COMPILER V9.00   PRO11                                                                 02/24/2017 23:34:08 PAGE 2   
+
+  56                  3,      0,      2,      4,
+  57                  1,      0,      3,      4,
+  58                  7,      0,      2,      4,      //
+  59                  6,      0,      2,      16,
+  60          
+  61                  0x00
+  62          };   
+  63            
+  64          void delay (unsigned char m)   //控制频率延时    
+  65          {       int i;
+  66   1              if(s==0)
+  67   1              {       if(b==1)       i=pitch1[m];
+  68   2                      else if(b==2)  i=pitch2[m];
+  69   2                           else      i=pitch3[m];
+  70   2              }
+  71   1              else
+  72   1              {       if(b==1)       i=pitch1s[m];
+  73   2                      else if(b==2)  i=pitch2s[m];
+  74   2                           else      i=pitch3s[m];
+  75   2              }
+  76   1              while(--i);   
+  77   1      }   
+  78          void delayms(unsigned char a)  //毫秒延时子程序    
+  79          {       while(--a);     
+  80   1      }    
+  81          void main()   
+  82          {       unsigned char p,m;         //m 音高    
+  83   1              unsigned char i=0;      
+  84   1              TMOD = 0x01;   
+  85   1              TH0  = 0x3c;
+  86   1              TL0  = 0xaf;   
+  87   1              EA   = 1;
+  88   1              ET0  = 1;  
+  89   1      play:
+  90   1              while(1)   
+  91   1              {   
+  92   2              a:  p=music_tab[i];   
+  93   2                      if(p==0x00)       
+  94   2                      {       i=0;
+  95   3                              delayms(1000); 
+  96   3                              goto play;         //如果碰到结束符,延时1秒,回到开始再来一遍  
+  97   3                      }       
+  98   2                      else if(p==0xff)  
+  99   2                      {       i=i+1;
+ 100   3                              delayms(100);
+ 101   3                              TR0=0;
+ 102   3                              goto a;            //若碰到休止符,延时100ms,继续取下一音符
+ 103   3                      }      
+ 104   2                      else
+ 105   2                      {       m=music_tab[i++];  //音高
+ 106   3                              s=music_tab[i++];  //升音
+ 107   3                              b=music_tab[i++];  //八度
+ 108   3                              n=music_tab[i++];  //节拍
+ 109   3                      }      
+ 110   2                      TR0=1;                 //开定时器0    
+ 111   2                      while(n!=0)            //等待节拍完成,输出音频  
+ 112   2                      {       Beep=~Beep;
+ 113   3                              delay(m);    
+ 114   3                      } 
+ 115   2                      TR0=0;                 //关定时器0    
+ 116   2              }   
+ 117   1      } 
+C51 COMPILER V9.00   PRO11                                                                 02/24/2017 23:34:08 PAGE 3   
+
+ 118          void int0() interrupt 1        //采用中断定时器0 控制节拍    
+ 119          {       TH0=0x3c;   
+ 120   1              TL0=0xaf;   
+ 121   1              n--;   
+ 122   1      } 
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    218    ----
+   CONSTANT SIZE    =    259    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,21 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\XX\Desktop\MyKeil\pro11\pro11.uvproj
+Project File Date:  02/24/2017
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling pro11.c...
+linking...
+Program Size: data=12.0 xdata=0 code=627
+creating hex file from "pro11"...
+"pro11" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=12.0 xdata=0 code=627
+creating hex file from "pro11"...
+"pro11" - 0 Error(s), 0 Warning(s).
