@@ -1,0 +1,154 @@
+C51 COMPILER V9.00   PRO13                                                                 03/17/2017 23:19:40 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE PRO13
+OBJECT MODULE PLACED IN pro13.OBJ
+COMPILER INVOKED BY: D:\_RUANJIAN\keil\C51\BIN\C51.EXE pro13.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //P1ø⁄Õ‚Ω”æÿ’Ûº¸≈Ã
+   2          
+   3          #include <reg52.h>
+   4          
+   5          sbit P1_0 = P1^0;
+   6          sbit P1_1 = P1^1;
+   7          sbit P1_2 = P1^2;
+   8          sbit P1_3 = P1^3;
+   9          sbit P1_4 = P1^4;
+  10          sbit P1_5 = P1^5;
+  11          sbit P1_6 = P1^6;
+  12          sbit P1_7 = P1^7;
+  13          sbit P2_0 = P2^0;
+  14          sbit P2_1 = P2^1;
+  15          sbit P2_2 = P2^2;
+  16          sbit P2_3 = P2^3;
+  17          
+  18          int r;
+  19          int keynum[4][5]={{ 1, 2, 3, 4,21},
+  20                            { 5, 6, 7, 8,22},
+  21                                            { 9,10,11,12,23},
+  22                                            {13,14,15,16,24}};
+  23          int table[]={0xc0,0xf9,0xa4,0xb0,0x99,
+  24                       0x92,0x82,0xf8,0x80,0x90};
+  25          
+  26          int keyboard()
+  27          {       
+  28   1              int i,j,t;
+  29   1      
+  30   1              r=0;
+  31   1              P1=0xf0;
+  32   1              while(1)
+  33   1              {
+  34   2                      if(P1_4==0)
+  35   2                      {
+  36   3                              i=0;
+  37   3                              for(t=0;t<20;t++);
+  38   3                              if(P1_4==0)
+  39   3                                      break;
+  40   3                      }
+  41   2                      if(P1_5==0)
+  42   2                      {
+  43   3                              i=1;
+  44   3                              for(t=0;t<20;t++);
+  45   3                              if(P1_5==0)
+  46   3                                      break;
+  47   3                      }
+  48   2                      if(P1_6==0)
+  49   2                      {
+  50   3                              i=2;
+  51   3                              for(t=0;t<20;t++);
+  52   3                              if(P1_6==0)
+  53   3                                      break;
+  54   3                      }
+  55   2                      if(P1_7==0)
+C51 COMPILER V9.00   PRO13                                                                 03/17/2017 23:19:40 PAGE 2   
+
+  56   2                      {
+  57   3                              i=3;
+  58   3                              for(t=0;t<20;t++);
+  59   3                              if(P1_7==0)
+  60   3                                      break;
+  61   3                      }                                                                                                                                                 
+  62   2              }
+  63   1              P1_3=1;
+  64   1              if(P1_4&&P1_5&&P1_6&&P1_7)
+  65   1              { 
+  66   2                      j=0;
+  67   2                      r=1;
+  68   2              }
+  69   1              else
+  70   1              {
+  71   2                      P1_3=0;
+  72   2                      P1_2=1;
+  73   2                      if(P1_4&&P1_5&&P1_6&&P1_7)
+  74   2                      {
+  75   3                              j=1;
+  76   3                              r=1;
+  77   3                      }
+  78   2                      else
+  79   2                      {
+  80   3                              P1_2=0;
+  81   3                              P1_1=1;
+  82   3                              if(P1_4&&P1_5&&P1_6&&P1_7)
+  83   3                              {
+  84   4                                      j=2;
+  85   4                                      r=1;
+  86   4                              }
+  87   3                              else
+  88   3                              {
+  89   4                                      P1_1=0;
+  90   4                                      P1_0=1;
+  91   4                                      if(P1_4&&P1_5&&P1_6&&P1_7)
+  92   4                                      {
+  93   5                                              j=3;
+  94   5                                              r=1;
+  95   5                                      }
+  96   4                                      else
+  97   4                                      {
+  98   5                                              j=4;
+  99   5                                              r=1;
+ 100   5                                      }
+ 101   4                              }                       
+ 102   3                      }
+ 103   2              }
+ 104   1              return(keynum[i][j]);
+ 105   1      }
+ 106          
+ 107          void main()
+ 108          {
+ 109   1              int temp,o,t;
+ 110   1      
+ 111   1              while(1)
+ 112   1              {
+ 113   2                      temp=keyboard();
+ 114   2                      if(r==1)
+ 115   2                              o=temp;
+ 116   2      
+ 117   2                      P0=table[o/10];
+C51 COMPILER V9.00   PRO13                                                                 03/17/2017 23:19:40 PAGE 3   
+
+ 118   2                      P2_2 = 0;
+ 119   2                      for(t=0;t<20;t++);
+ 120   2                      P2_2 = 1;
+ 121   2      
+ 122   2                      P0=table[o%10];
+ 123   2                      P2_3 = 0;
+ 124   2                      for(t=0;t<20;t++);
+ 125   2                      P2_3 = 1;
+ 126   2              }
+ 127   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    314    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     62       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
