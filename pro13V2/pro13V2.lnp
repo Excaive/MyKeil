@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"pro13V2.obj" 
+TO "pro13V2" 
+RAMSIZE(256) 

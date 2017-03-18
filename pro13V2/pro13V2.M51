@@ -1,0 +1,228 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        03/18/2017  11:41:17  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\_RUANJIAN\KEIL\C51\BIN\BL51.EXE STARTUP.obj, pro13V2.obj TO pro13V2 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  pro13V2.obj (PRO13V2)
+  D:\_RUANJIAN\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  D:\_RUANJIAN\KEIL\C51\LIB\C51S.LIB (?C?SIDIV)
+  D:\_RUANJIAN\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  pro13V2 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     003EH     UNIT         ?DT?PRO13V2
+            DATA    0046H     0002H     UNIT         _DATA_GROUP_
+            IDATA   0048H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00E0H     UNIT         ?PR?KEYBOARD?PRO13V2
+            CODE    00E3H     008CH     UNIT         ?C_C51STARTUP
+            CODE    016FH     008BH     UNIT         ?C?LIB_CODE
+            CODE    01FAH     005FH     UNIT         ?PR?MAIN?PRO13V2
+            CODE    0259H     0042H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   pro13V2 (?C_STARTUP)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?PRO13V2
+  +--> ?C_INITSEG
+
+?PR?MAIN?PRO13V2               0046H    0002H
+  +--> ?PR?KEYBOARD?PRO13V2
+
+
+
+SYMBOL TABLE OF MODULE:  pro13V2 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/18/2017  11:41:17  PAGE 2
+
+
+  C:00E3H         SEGMENT       ?C_C51STARTUP
+  I:0048H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:00E6H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:00E3H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:00E3H         LINE#         133
+  C:00E5H         LINE#         134
+  C:00E6H         LINE#         135
+  C:00E7H         LINE#         136
+  C:00E9H         LINE#         185
+  C:00ECH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        PRO13V2
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:0008H         PUBLIC        table
+  D:00A8H         PUBLIC        IE
+  B:0090H.0       PUBLIC        P1_0
+  B:0090H.1       PUBLIC        P1_1
+  B:0090H.2       PUBLIC        P1_2
+  B:00A0H.2       PUBLIC        P2_2
+  B:0090H.3       PUBLIC        P1_3
+  B:00A0H.3       PUBLIC        P2_3
+  B:0090H.4       PUBLIC        P1_4
+  B:0090H.5       PUBLIC        P1_5
+  B:0090H.6       PUBLIC        P1_6
+  B:0090H.7       PUBLIC        P1_7
+  D:00B8H         PUBLIC        IP
+  D:001CH         PUBLIC        keynum
+  C:01FAH         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0003H         PUBLIC        keyboard
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/18/2017  11:41:17  PAGE 3
+
+
+  D:00C8H         PUBLIC        T2CON
+  D:0044H         PUBLIC        l
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          KEYBOARD
+  -------         DO            
+  D:0082H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  D:0004H         SYMBOL        t
+  -------         ENDDO         
+  C:0003H         LINE#         26
+  C:0003H         LINE#         27
+  C:0003H         LINE#         30
+  C:0009H         LINE#         31
+  C:000CH         LINE#         33
+  C:000FH         LINE#         34
+  C:000FH         LINE#         35
+  C:001DH         LINE#         36
+  C:0020H         LINE#         37
+  C:0025H         LINE#         38
+  C:0027H         LINE#         40
+  C:002AH         LINE#         41
+  C:002AH         LINE#         42
+  C:0038H         LINE#         43
+  C:003BH         LINE#         44
+  C:003EH         LINE#         45
+  C:0040H         LINE#         47
+  C:0043H         LINE#         48
+  C:0043H         LINE#         49
+  C:0051H         LINE#         50
+  C:0054H         LINE#         51
+  C:0057H         LINE#         52
+  C:0059H         LINE#         54
+  C:005CH         LINE#         55
+  C:005CH         LINE#         56
+  C:006AH         LINE#         57
+  C:006DH         LINE#         58
+  C:0070H         LINE#         59
+  C:0072H         LINE#         61
+  C:0077H         LINE#         63
+  C:007FH         LINE#         64
+  C:007FH         LINE#         65
+  C:0081H         LINE#         66
+  C:008DH         LINE#         67
+  C:0090H         LINE#         69
+  C:0090H         LINE#         70
+  C:0092H         LINE#         71
+  C:0094H         LINE#         72
+  C:00A0H         LINE#         73
+  C:00A4H         LINE#         75
+  C:00A4H         LINE#         76
+  C:00A6H         LINE#         77
+  C:00A8H         LINE#         78
+  C:00B4H         LINE#         79
+  C:00B8H         LINE#         81
+  C:00B8H         LINE#         82
+  C:00BAH         LINE#         83
+  C:00BCH         LINE#         84
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/18/2017  11:41:17  PAGE 4
+
+
+  C:00C8H         LINE#         85
+  C:00CCH         LINE#         87
+  C:00CEH         LINE#         88
+  C:00CEH         LINE#         89
+  C:00CEH         LINE#         90
+  C:00CEH         LINE#         91
+  C:00CEH         LINE#         92
+  C:00E2H         LINE#         93
+  -------         ENDPROC       KEYBOARD
+  -------         PROC          MAIN
+  -------         DO            
+  D:0006H         SYMBOL        temp
+  D:0046H         SYMBOL        o
+  D:0006H         SYMBOL        t
+  -------         ENDDO         
+  C:01FAH         LINE#         95
+  C:01FAH         LINE#         96
+  C:01FAH         LINE#         99
+  C:01FAH         LINE#         100
+  C:01FAH         LINE#         101
+  C:01FDH         LINE#         102
+  C:0205H         LINE#         103
+  C:0209H         LINE#         105
+  C:021EH         LINE#         106
+  C:0220H         LINE#         107
+  C:022EH         LINE#         108
+  C:0230H         LINE#         110
+  C:0245H         LINE#         111
+  C:0247H         LINE#         112
+  C:0255H         LINE#         113
+  C:0257H         LINE#         114
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        PRO13V2
+
+  -------         MODULE        ?C?SIDIV
+  C:016FH         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:01A5H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=73.0 xdata=0 code=667
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
